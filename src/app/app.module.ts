@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { AddTripComponent } from './components/add-trip/add-trip.component';
+import { NavComponent } from './app/components/nav/nav.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { AddTripComponent } from './components/add-trip/add-trip.component';
     LoginComponent,
     RegisterComponent,
     VerifyComponent,
-    AddTripComponent
+    AddTripComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

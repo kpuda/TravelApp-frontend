@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ResponseObject } from 'src/app/_objects/ResponseObject';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
@@ -19,11 +20,12 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit(): void {    
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
+      this.router.navigate(['/homepage']);
     }
   }
   onSubmit(): void {
@@ -32,10 +34,9 @@ export class LoginComponent implements OnInit {
     
     this.authService.login(username, password).subscribe(
       (data) => {
-        console.log(data);
-        
         this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data.accessToken);
+        this.tokenStorage.saveRoles(data.roles);
+        this.tokenStorage.saveUser(data.username);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.reloadPage();

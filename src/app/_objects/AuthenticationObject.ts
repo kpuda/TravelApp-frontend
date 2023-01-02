@@ -1,5 +1,6 @@
 export interface AuthenticationObject {
+    username:string;
     statusCode:number;
     accessToken:string;
-    userName:string;
+    roles:Array<string>;
 }

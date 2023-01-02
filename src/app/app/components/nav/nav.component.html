@@ -1,0 +1,33 @@
+<div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">TravelApi</a>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Ulubione</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Szukaj wycieczki</a>
+              </li>
+              <li>
+                <div *ngIf="!isLoggedIn" ngbDropdown class="d-inline-block">
+                    <button (click)="routeToLogin()" type="button" class="btn btn-outline-primary" >
+                        {{buttonText}}
+                    </button>
+                </div>
+                <div *ngIf="isLoggedIn" ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        {{buttonText}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>Profil</button>
+                        <button ngbDropdownItem>Ustawienia</button>
+                        <button ngbDropdownItem (click)="logout()">Wyloguj</button>
+                    </div>
+                </div>
+              </li>
+        </ul>
+        
+    </div>
+  </nav>
+</div>
