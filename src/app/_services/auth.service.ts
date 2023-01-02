@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResponseObject } from '../_objects/ResponseObject';
 import { AuthenticationObject } from '../_objects/AuthenticationObject';
+import { WrappedListResponse } from '../_objects/WrappedListResponse';
 
 const SERVER = 'http://localhost:8080/api';
 const LOGIN_ENDPOINT = '/authorization/login';
@@ -38,5 +39,9 @@ export class AuthService {
 
   verify(token:string): Observable<ResponseObject> {
       return this.http.post<ResponseObject>(SERVER+VERIFY_ENDPOINT+token,httpOptions);
+  }
+
+  users(): Observable<WrappedListResponse> {
+    return this.http.get<WrappedListResponse>(SERVER+"/user/users",httpOptions);
   }
 }

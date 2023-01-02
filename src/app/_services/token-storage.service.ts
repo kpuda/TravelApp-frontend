@@ -45,7 +45,7 @@ export class TokenStorageService {
     return '';
   }
 
-  public getUser(): any {
+  public getRoles(): any {
     const user = window.sessionStorage.getItem(ROLES_KEY);
     if (user) {
       return JSON.parse(user);

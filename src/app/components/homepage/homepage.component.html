@@ -1,1 +1,4 @@
 <p>homepage works!</p>
+<select ng-model="selectedTestAccount" >
+    <option *ngFor="let user of usersList" [value]="user">{{user}}</option>
+</select>
