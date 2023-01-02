@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ResponseObject } from '../_objects/ResponseObject';
 import { AuthenticationObject } from '../_objects/AuthenticationObject';
 import { WrappedListResponse } from '../_objects/WrappedListResponse';
+import { TokenStorageService } from './token-storage.service';
 
 const SERVER = 'http://localhost:8080/api';
 const LOGIN_ENDPOINT = '/authorization/login';
@@ -19,7 +20,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private tokenStorage: TokenStorageService) { }
 
   login(username: string, password: string): Observable<AuthenticationObject> {
     console.log("XD");
@@ -42,6 +43,7 @@ export class AuthService {
   }
 
   users(): Observable<WrappedListResponse> {
-    return this.http.get<WrappedListResponse>(SERVER+"/user/users",httpOptions);
+    let option = {headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer '+this.tokenStorage.getToken()})};
+    return this.http.get<WrappedListResponse>(SERVER+"/user/users",option);
   }
 }

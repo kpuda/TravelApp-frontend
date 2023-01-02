@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ErrorResponseObject } from 'src/app/_objects/ErrorResponseObject';
 import { WrappedListResponse } from 'src/app/_objects/WrappedListResponse';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
@@ -22,13 +23,9 @@ export class HomepageComponent implements OnInit {
   private async populateList(){
     await this.authService.users().subscribe(
       (response: WrappedListResponse)=>{
-        this.usersList=response.list;
-        console.log("loaded");
-        
-        console.log(this.usersList);
-        
+        this.usersList=response.list;        
       },
-      (error:HttpErrorResponse)=> {
+      (error:ErrorResponseObject)=> {
       console.log(error);
       }
     )

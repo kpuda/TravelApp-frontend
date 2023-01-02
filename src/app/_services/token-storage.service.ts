@@ -21,8 +21,12 @@ export class TokenStorageService {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY);
+  public getToken(): string {
+    let token = window.sessionStorage.getItem(TOKEN_KEY);    
+    if(token){
+    return token;
+  } 
+  return '';
   }
 
   public saveRoles(roles: any): void {
